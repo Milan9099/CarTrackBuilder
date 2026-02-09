@@ -1,0 +1,50 @@
+body{
+    font-family: sans-serif;
+}
+
+.bc{
+    background-color: ghostwhite;
+}
+
+.center{
+    display: flex;
+    justify-content: center;
+}
+
+.centerVert{
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.headers{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.menuButton{
+    padding: 20px;
+    background-color: cornflowerblue;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    text-decoration: none;
+}
+
+#main-grid{
+    display: grid;
+    grid-template-columns: repeat(20, 50px);
+    grid-template-rows: repeat(20, 50px);
+    border: black solid 1px;
+}
+
+.node-unit{
+    background-color: red;
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
