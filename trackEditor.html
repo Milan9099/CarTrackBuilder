@@ -8,11 +8,34 @@
 </head>
 <body>
 
-<div class="center">
-  <div id="main-grid">
+<div class="main-display">
+    <div class="nav-menu">
+        <div class="logo">
+            <h1>Car Track Builder</h1>
+            <p>Mityska</p>
+        </div>
+        <div class="buttons">
+            <div class="buttons" id="start-buttons">
+                <a href="trackEditor.html" class="menuButton">Nová mapa</a>
+                <a href="#" class="menuButton" id="btnLoad">Načíst mapu</a>
+            </div>
+            <div class="buttons" id="edit-buttons">
+                <a href="#" class="menuButton" id="btnSave">Uložit</a>
+                <a href="mainMenu.html" class="menuButton">Zpět</a>
+            </div>
+        </div>
+    </div>
+    <div class="center">
+        <div id="main-grid">
 
-  </div>
+        </div>
+    </div>
+
 </div>
+
+<template>
+    <div class="node-unit node-grass" data-index></div>
+</template>
 
 <script src="script.js"></script>
 </body>

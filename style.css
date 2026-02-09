@@ -1,8 +1,5 @@
 body{
     font-family: sans-serif;
-}
-
-.bc{
     background-color: ghostwhite;
 }
 
@@ -30,8 +27,9 @@ body{
     color: white;
     border: none;
     border-radius: 10px;
-    font-size: 18px;
+    font-size: 20px;
     text-decoration: none;
+    cursor: pointer;
 }
 
 #main-grid{
@@ -41,10 +39,39 @@ body{
     border: black solid 1px;
 }
 
-.node-unit{
-    background-color: red;
-    text-align: center;
-    justify-content: center;
+.main-display{
+    display: grid;
+    grid-template-columns: 200px auto;
+}
+
+.nav-menu, .buttons{
     display: flex;
     flex-direction: column;
+    gap: 5px;
+    text-align: center;
+}
+
+.nav-menu{
+    padding-left: 15px;
+}
+
+.node-unit{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.node-track{
+    background-image: url("/images/track.PNG");
+}
+.node-grass{
+    background-image: url("/images/grass.JPG");
+}
+.node-water{
+    background-image: url("/images/water.JPG");
+}
+
+.hidden{
+    display: none
 }
