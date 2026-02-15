@@ -1,10 +1,17 @@
 const grid = document.querySelector("#main-grid")
-const btnSave = document.querySelector("#btnSave")
-const btnLoad = document.querySelector("#btnLoad")
 const template = document.querySelector("template")
 
 const startBtns = document.querySelector('#start-buttons')
 const editBtns = document.querySelector('#edit-buttons')
+const btnSave = document.querySelector("#btnSave")
+const btnLoad = document.querySelector("#btnLoad")
+const btnNew = document.querySelector("#btnNewMap")
+const btnReset = document.querySelector("#btnReset")
+const btnBack = document.querySelector("#btnBack")
+
+const modal = document.querySelector("#loadModal");
+const mapsList = document.querySelector("#maps-list");
+const btnCloseModal = document.querySelector("#closeModal");
 
 const states = ['node-grass', 'node-track', 'node-water']
 
@@ -23,8 +30,16 @@ while (i < 400) {
     i++
 }
 
+
 btnSave.addEventListener('click', saveData)
-btnSave.addEventListener('click', loadData)
+btnLoad.addEventListener('click', loadData)
+btnNew.addEventListener('click', newMap)
+btnReset.addEventListener('click', reset)
+btnBack.addEventListener('click', backToMenu)
+
+btnCloseModal.addEventListener('click', () => {
+    modal.classList.add('hidden')
+})
 
 function tileControl(e){
     let tileValue = data[parseInt(e.target.dataset.index)]
@@ -36,23 +51,83 @@ function tileControl(e){
     data[parseInt(e.target.dataset.index)] = tileValue
 }
 
-function saveData(){
-    localStorage.setItem('data1', JSON.stringify(data))
-}
-
-function loadData(){
-    let xxx = localStorage.getItem('data1')
-
-    if (xxx){
-        data = JSON.parse(xxx)
-    }
-
-    console.log(data)
-}
-
-function refreshGrid(){
+function reset(){
     let i = 0
     while (i < 400) {
-
+        data[i] = 0
+        i++
     }
+
+    refreshGrid()
+}
+
+function newMap(){
+    startBtns.classList.add('hidden')
+    editBtns.classList.remove('hidden')
+    grid.classList.remove('hidden')
+
+    reset()
+}
+
+function backToMenu(){
+    startBtns.classList.remove('hidden')
+    editBtns.classList.add('hidden')
+    grid.classList.add('hidden')
+}
+
+function saveData() {
+    const mapName = prompt("Zadej název mapy pro uložení:");
+
+    if (!mapName) return;
+
+    let allMaps = JSON.parse(localStorage.getItem('myTrackEditorMaps')) || {};
+
+    allMaps[mapName] = data;
+
+    localStorage.setItem('myTrackEditorMaps', JSON.stringify(allMaps));
+
+    alert(`Mapa "${mapName}" byla úspěšně uložena.`);
+}
+
+function refreshGrid() {
+    const nodes = grid.querySelectorAll('.node-unit');
+
+    nodes.forEach((node, index) => {
+        const value = data[index];
+
+        node.classList.remove(...states);
+
+        node.classList.add(states[value]);
+    });
+}
+
+function loadData() {
+    const allMaps = JSON.parse(localStorage.getItem('myTrackEditorMaps')) || {};
+    const names = Object.keys(allMaps);
+
+    if (names.length === 0) {
+        alert("Nemáš uložené žádné mapy.");
+        return;
+    }
+
+    mapsList.innerHTML = "";
+    modal.classList.remove("hidden");
+
+    names.forEach(name => {
+        const btn = document.createElement("button");
+        btn.innerText = name;
+        btn.className = "load-map-btn";
+
+        btn.onclick = () => {
+            data = allMaps[name];
+            refreshGrid();
+            modal.classList.add("hidden");
+
+            startBtns.classList.add('hidden')
+            editBtns.classList.remove('hidden')
+            grid.classList.remove('hidden')
+        };
+
+        mapsList.appendChild(btn);
+    });
 }

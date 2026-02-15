@@ -16,17 +16,25 @@
         </div>
         <div class="buttons">
             <div class="buttons" id="start-buttons">
-                <a href="trackEditor.html" class="menuButton">Nová mapa</a>
+                <a href="#" class="menuButton" id="btnNewMap">Nová mapa</a>
                 <a href="#" class="menuButton" id="btnLoad">Načíst mapu</a>
             </div>
-            <div class="buttons" id="edit-buttons">
+            <div class="buttons hidden" id="edit-buttons">
                 <a href="#" class="menuButton" id="btnSave">Uložit</a>
-                <a href="#" class="menuButton">Reset</a>
+                <a href="#" class="menuButton" id="btnReset">Reset</a>
+                <a href="#" class="menuButton" id="btnBack">Zpět</a>
+            </div>
+        </div>
+        <div id="loadModal" class="modal hidden">
+            <div class="modal-content">
+                <h2>Vyberte mapu</h2>
+                <div id="maps-list"></div>
+                <button id="closeModal" >Zrušit</button>
             </div>
         </div>
     </div>
     <div class="center">
-        <div id="main-grid">
+        <div id="main-grid" class="hidden">
 
         </div>
     </div>
