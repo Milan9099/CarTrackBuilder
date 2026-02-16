@@ -13,6 +13,11 @@ const modal = document.querySelector("#loadModal");
 const mapsList = document.querySelector("#maps-list");
 const btnCloseModal = document.querySelector("#closeModal");
 
+const saveModal = document.querySelector('#saveModal')
+const btnCloseSaveModal = document.querySelector('#closeSaveModal')
+const btnSaveSaveModal = document.querySelector('#saveSaveModal')
+const nameInput = document.querySelector('#name-input')
+
 const states = ['node-grass', 'node-track', 'node-water']
 
 let data  = []
@@ -31,11 +36,14 @@ while (i < 400) {
 }
 
 
-btnSave.addEventListener('click', saveData)
+btnSave.addEventListener('click', showSaveModal)
 btnLoad.addEventListener('click', loadData)
 btnNew.addEventListener('click', newMap)
 btnReset.addEventListener('click', reset)
 btnBack.addEventListener('click', backToMenu)
+
+btnSaveSaveModal.addEventListener('click', saveData)
+btnCloseSaveModal.addEventListener('click', hideSaveModal)
 
 btnCloseModal.addEventListener('click', () => {
     modal.classList.add('hidden')
@@ -75,18 +83,29 @@ function backToMenu(){
     grid.classList.add('hidden')
 }
 
-function saveData() {
-    const mapName = prompt("Zadej název mapy pro uložení:");
+function showSaveModal() {
+    saveModal.classList.remove('hidden')
 
-    if (!mapName) return;
+    nameInput.value = ""
+}
+function hideSaveModal() {
+    saveModal.classList.add('hidden')
+}
+
+function saveData(){
+    if (!nameInput.value){
+        return
+    }
 
     let allMaps = JSON.parse(localStorage.getItem('myTrackEditorMaps')) || {};
 
-    allMaps[mapName] = data;
+    allMaps[nameInput.value] = data;
 
     localStorage.setItem('myTrackEditorMaps', JSON.stringify(allMaps));
 
-    alert(`Mapa "${mapName}" byla úspěšně uložena.`);
+    alert(`Mapa "${nameInput.value}" byla úspěšně uložena.`);
+
+    saveModal.classList.add('hidden')
 }
 
 function refreshGrid() {
