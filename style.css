@@ -63,13 +63,13 @@ body{
 }
 
 .node-track{
-    background-image: url("/images/track.PNG");
+    background-image: url("images/track.PNG");
 }
 .node-grass{
-    background-image: url("/images/grass.JPG");
+    background-image: url("images/grass.JPG");
 }
 .node-water{
-    background-image: url("/images/water.JPG");
+    background-image: url("images/water.JPG");
 }
 
 .hidden{
